@@ -16,7 +16,7 @@ import doc.inventorySystem.Common.CommonProxy;
 import doc.inventorySystem.Common.ISEventHandler;
 import doc.inventorySystem.Packets.PacketHandler;
 
-@Mod(modid="inventorySystems", name = "Inventory System", version = "0.0.1")
+@Mod(modid="inventorysystems", name = "Inventory System", version = "0.0.1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { "inventorySystem" }, packetHandler = PacketHandler.class)
 public class InventorySystemCore {
 
