@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -68,7 +69,9 @@ public class ExtraInvOverlay extends Gui {
 		for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
 			if (mc.thePlayer.inventory.mainInventory[i] != null) {
 				Icon icon = mc.thePlayer.inventory.mainInventory[i].getIconIndex();
-				itemRenderer.renderIcon(xCenter - textureXSize + (16 * i) - 3, yCenter + 89, icon, 16, 16);
+				ItemStack toRender = new ItemStack(mc.thePlayer.inventory.mainInventory[i].getItem());
+				itemRenderer.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.func_110434_K(), toRender, xCenter, yCenter);
+				//itemRenderer.renderIcon(xCenter - textureXSize + (16 * i) + 6, yCenter + 89, icon, 16, 16);
 			}
 		}
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
