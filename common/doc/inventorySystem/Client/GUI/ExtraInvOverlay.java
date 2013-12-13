@@ -1,6 +1,7 @@
 package doc.inventorySystem.Client.GUI;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -20,7 +21,6 @@ import doc.inventorySystem.Common.ExtendedEntityRender;
 
 @SideOnly(Side.CLIENT)
 public class ExtraInvOverlay extends Gui {
-	public static RenderItem itemRenderer = new RenderItem();
 	private Minecraft mc;
 
 	int xPos = 2;
@@ -29,6 +29,10 @@ public class ExtraInvOverlay extends Gui {
 	int textureXSize = 182;
 	int textureYSize = 22;
 
+	FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+	
+	public static RenderItem itemRenderer = new RenderItem();
+	
 	public static final ResourceLocation extraInventory = new ResourceLocation("textures/gui/widgets.png");
 	public static final ResourceLocation ITEM_TEXTURE = TextureMap.field_110576_c;
 
@@ -73,7 +77,7 @@ public class ExtraInvOverlay extends Gui {
 			if (mc.thePlayer.inventory.mainInventory[i] != null) {
 				Icon icon = mc.thePlayer.inventory.mainInventory[i].getIconIndex();
 				ItemStack toRender = new ItemStack(mc.thePlayer.inventory.mainInventory[i].getItem());
-				itemRenderer.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.func_110434_K(), toRender, xCenter, yCenter);
+				itemRenderer.renderItemAndEffectIntoGUI(fontRenderer, mc.func_110434_K(), toRender, xCenter - textureXSize + (16 * i) + 6, yCenter + 89);
 				//itemRenderer.renderIcon(xCenter - textureXSize + (16 * i) + 6, yCenter + 89, icon, 16, 16);
 			}
 		}
