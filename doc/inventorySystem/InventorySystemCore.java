@@ -23,7 +23,7 @@ public class InventorySystemCore {
 	@Instance
 	public static InventorySystemCore instance;
 	
-	@SidedProxy(clientSide = "doc.inventorySystems.Client.ClientProxy", serverSide = "doc.inventorySystems.Client.CommonProxy")
+	@SidedProxy(clientSide = "doc.inventorySystem.Client.ClientProxy", serverSide = "doc.inventorySystem.Common.CommonProxy")
     public static CommonProxy proxy;
 	
 	@EventHandler

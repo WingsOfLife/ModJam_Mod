@@ -1,21 +1,24 @@
 package doc.inventorySystem.Client.GUI;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import doc.inventorySystem.Common.ExtendedEntityRender;
 
 @SideOnly(Side.CLIENT)
 public class ExtraInvOverlay extends Gui {
-
+	public static RenderItem itemRenderer = new RenderItem();
 	private Minecraft mc;
 	
 	int xPos = 2;
@@ -50,6 +53,8 @@ public class ExtraInvOverlay extends Gui {
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		Icon icon = mc.thePlayer.inventory.mainInventory[mc.thePlayer.inventory.currentItem].getIconIndex();
+		itemRenderer.renderIcon(xCenter, yCenter, icon, xCenter + 16, yCenter + 16);
 		mc.renderEngine.func_110577_a(extraInventory); //TODO: Bind Texture updating ForgeVersion
 		drawTexturedModalRect(xCenter, yCenter, 0, 0, textureXSize, textureYSize);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
