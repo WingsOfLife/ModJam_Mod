@@ -1,7 +1,10 @@
 package doc.inventorySystem.Common;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
@@ -11,6 +14,7 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	public static final String EXT_NAME = "customInventoryRender";
 	
 	public final EntityPlayer player;
+	public final ArrayList<ItemStack[]> loadOuts = new ArrayList<ItemStack[]>(); 
 	
 	public ExtendedEntityRender(EntityPlayer player) {
 		this.player = player;
