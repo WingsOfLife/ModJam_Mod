@@ -26,8 +26,8 @@ public class ExtraInvOverlay extends Gui {
 	int xPos = 2;
 	int yPos = 2;
 	
-	int textureXSize = 24;
-	int textureYSize = 24;
+	int textureXSize = 184;
+	int textureYSize = 22;
 	
 	public static final ResourceLocation extraInventory = new ResourceLocation("textures/gui/widgets.png");
 	
@@ -60,7 +60,7 @@ public class ExtraInvOverlay extends Gui {
 		//Icon icon = new ItemStack(Item.diamond, 1).getIconIndex();
 		//itemRenderer.renderIcon(xCenter, yCenter, icon, 16, 16);
 		mc.renderEngine.func_110577_a(extraInventory); //TODO: Bind Texture updating ForgeVersion
-		drawTexturedModalRect(xCenter - textureXSize, yCenter - 15, 0, 0, textureXSize, textureYSize);
+		drawTexturedModalRect(xCenter - textureXSize, yCenter + 86, 0, 0, textureXSize, textureYSize);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 	}
