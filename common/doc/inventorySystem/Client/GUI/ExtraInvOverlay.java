@@ -65,6 +65,9 @@ public class ExtraInvOverlay extends Gui {
 		mc.renderEngine.func_110577_a(extraInventory); //TODO: Bind Texture updating ForgeVersion
 		drawTexturedModalRect(xCenter - textureXSize, yCenter + 86, 0, 0, textureXSize, textureYSize);
 		
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GL11.glDepthMask(true);
+		
 		mc.renderEngine.func_110577_a(ITEM_TEXTURE);
 		for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
 			if (mc.thePlayer.inventory.mainInventory[i] != null) {
@@ -74,7 +77,5 @@ public class ExtraInvOverlay extends Gui {
 				//itemRenderer.renderIcon(xCenter - textureXSize + (16 * i) + 6, yCenter + 89, icon, 16, 16);
 			}
 		}
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glDepthMask(true);
 	}
 }
