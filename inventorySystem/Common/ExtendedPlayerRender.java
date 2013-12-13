@@ -16,7 +16,7 @@ public class ExtendedPlayerRender implements IExtendedEntityProperties {
 		this.player = player;
 	}
 	
-	public static finalVoid
+	public static final Void
 	
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
