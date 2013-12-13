@@ -3,8 +3,7 @@ package doc.inventorySystem.Client.GUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -22,45 +21,56 @@ import doc.inventorySystem.Common.ExtendedEntityRender;
 public class ExtraInvOverlay extends Gui {
 	public static RenderItem itemRenderer = new RenderItem();
 	private Minecraft mc;
-	
+
 	int xPos = 2;
 	int yPos = 2;
-	
-	int textureXSize = 184;
+
+	int textureXSize = 182;
 	int textureYSize = 22;
-	
+
 	public static final ResourceLocation extraInventory = new ResourceLocation("textures/gui/widgets.png");
-	
+	public static final ResourceLocation ITEM_TEXTURE = TextureMap.field_110576_c;
+
 	public ExtraInvOverlay(Minecraft mc) {
 		super();
 		this.mc = mc;
 	}
-	
+
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event) {
 		if (event.isCancelable() && event.type == ElementType.HOTBAR)
 			event.setCanceled(true);
-		
+
 		if (event.type != ElementType.HOTBAR)
 			return;
-		
+
 		ExtendedEntityRender props = new ExtendedEntityRender(mc.thePlayer);
 		if (props == null)
 			return;
-		
+
 		int xCenter = (event.resolution.getScaledWidth() + textureXSize) / 2;
 		int yCenter = (event.resolution.getScaledHeight() + textureYSize) / 2;
-		
+
+		int xStart = 0;
+		int yStart = 0;
+
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(false);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
-		//Icon icon = new ItemStack(Item.diamond, 1).getIconIndex();
-		//itemRenderer.renderIcon(xCenter, yCenter, icon, 16, 16);
+		
 		mc.renderEngine.func_110577_a(extraInventory); //TODO: Bind Texture updating ForgeVersion
 		drawTexturedModalRect(xCenter - textureXSize, yCenter + 86, 0, 0, textureXSize, textureYSize);
+		
+		mc.renderEngine.func_110577_a(ITEM_TEXTURE);
+		for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
+			if (mc.thePlayer.inventory.mainInventory[i] != null) {
+				Icon icon = mc.thePlayer.inventory.mainInventory[i].getIconIndex();
+				itemRenderer.renderIcon(xCenter - textureXSize + (16 * i) - 3, yCenter + 89, icon, 16, 16);
+			}
+		}
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 	}
