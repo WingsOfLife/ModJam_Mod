@@ -1,7 +1,6 @@
 package doc.inventorySystem.Client.GUI;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -15,6 +14,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -30,8 +30,6 @@ public class ExtraInvOverlay extends Gui {
 	int textureXSize = 182;
 	int textureYSize = 22;
 
-	FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-
 	public static RenderItem itemRenderer = new RenderItem();
 
 	public static final ResourceLocation extraInventory = new ResourceLocation("textures/gui/widgets.png");
@@ -44,13 +42,13 @@ public class ExtraInvOverlay extends Gui {
 
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event) {
-		/*if (event.isCancelable() && event.type == ElementType.HOTBAR)
-			event.setCanceled(true);*/
-
 		if (event.type != ElementType.HOTBAR)
 			return;
 
-		if (Keyboard.isKeyDown(Keyboard.KEY_E) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+		if (Keyboard.isKeyDown(Keyboard.KEY_Z) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+			
+			if (event.isCancelable() && event.type == ElementType.HOTBAR)
+				event.setCanceled(true);
 
 			ExtendedEntityRender props = new ExtendedEntityRender(mc.thePlayer);
 			if (props == null)
@@ -76,16 +74,19 @@ public class ExtraInvOverlay extends Gui {
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
 			GL11.glDepthMask(true);
 
+			GL11.glEnable(GL11.GL_LIGHTING);
+	        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			mc.renderEngine.func_110577_a(ITEM_TEXTURE);
 			for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
 				if (mc.thePlayer.inventory.mainInventory[i] != null) {
 					Icon icon = mc.thePlayer.inventory.mainInventory[i].getIconIndex();
-					ItemStack toRender = new ItemStack(mc.thePlayer.inventory.mainInventory[i].getItem());
-					itemRenderer.renderItemAndEffectIntoGUI(fontRenderer, mc.func_110434_K(), toRender, xCenter - textureXSize + (16 * i) + 6, yCenter);
-					itemRenderer.renderItemOverlayIntoGUI(fontRenderer, mc.func_110434_K(), toRender, xCenter - textureXSize + (16 * i) + 6, yCenter );
+					ItemStack toRender = new ItemStack(mc.thePlayer.inventory.mainInventory[i].getItem(), 1, mc.thePlayer.inventory.mainInventory[i].getItemDamage());
+					itemRenderer.renderItemAndEffectIntoGUI(null, mc.func_110434_K(), toRender, xCenter - textureXSize + (16 * i) + 6, yCenter);
+					//itemRenderer.renderItemOverlayIntoGUI(fontRenderer, mc.func_110434_K(), toRender, xCenter - textureXSize + (16 * i) + 6, yCenter );
 					//itemRenderer.renderIcon(xCenter - textureXSize + (16 * i) + 6, yCenter + 89, icon, 16, 16);
 				}
 			}
+			GL11.glDisable(GL11.GL_LIGHTING);
 		}
 	}
 }
