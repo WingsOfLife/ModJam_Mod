@@ -36,7 +36,7 @@ public class LoadOutGuiContainer extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = this.inventory.isInvNameLocalized() ? this.inventory.getInvName() : "";
 
-		this.fontRenderer.drawString(s, this.xSize - this.fontRenderer.getStringWidth(s), 12, 4210752);
+		this.fontRenderer.drawString(s, (this.xSize / 2) - this.fontRenderer.getStringWidth(s) + 22, (ySize / 2) - 15, 4210752);
 	}
 
 	/**
@@ -50,9 +50,7 @@ public class LoadOutGuiContainer extends GuiContainer {
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		int i1;
-		drawPlayerModel(k + 51, l + 75, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo,
-
-				this.mc.thePlayer);
+		//drawPlayerModel(k + 51, l + 75, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo, this.mc.thePlayer);
 	}
 
 	/**

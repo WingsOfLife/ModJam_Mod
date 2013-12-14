@@ -10,6 +10,13 @@ import net.minecraft.item.ItemStack;
 public class LoadoutContainer extends Container {
 	
 	public LoadoutContainer(EntityPlayer player, InventoryPlayer inventoryPlayer, LoadOutInventory inventoryCustom)	{
+		/*this.addSlotToContainer(new Slot(inventoryCustom, 0, 80, 8));
+		this.addSlotToContainer(new Slot(inventoryCustom, 1, 80, 26));*/
+		
+		for (int i = 0; i < 3; i++) // custom inventory
+			for (int j = 0; j < 9; j++)
+				this.addSlotToContainer(new Slot(inventoryCustom, j + i * 9 + 9, 8 + j * 18, 8 + i * 18));
+		
 		for (int i = 0; i < 3; i++) // vanilla inventory
 			for (int j = 0; j < 9; j++)
 				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
