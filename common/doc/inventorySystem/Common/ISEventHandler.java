@@ -1,7 +1,8 @@
 package doc.inventorySystem.Common;
 
-import doc.inventorySystem.Helper.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -24,11 +25,14 @@ public class ISEventHandler {
 	@ForgeSubscribe
 	public void onEntityDeath(LivingDeathEvent event) {
 		if (event.entity instanceof EntityPlayer) {
-
+			NBTTagCompound saveAcrossDeath = new NBTTagCompound();
 			ExtendedEntityRender props = ExtendedEntityRender.get((EntityPlayer) event.entity);
-			for (int i = 0; i < props.inventory.getSizeInventory(); i++)
-				if (props.inventory.getStackInSlot(i) != null)
-					ItemHelper.spawnItem(props.inventory.getStackInSlot(i), event.entity.worldObj, (int) event.entity.posX, (int) event.entity.posY, (int) event.entity.serverPosZ);
+			
+			for (int i = 0; i < props.inventory.getSizeInventory(); i++) {
+				ItemStack stack = props.inventory.getStackInSlot(i);
+				if (stack != null)
+					event.entity.dropItem(stack.itemID, stack.stackSize);
+			}
 		}
 	}
 }

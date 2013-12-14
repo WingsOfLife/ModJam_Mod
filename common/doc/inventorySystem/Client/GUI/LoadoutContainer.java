@@ -37,4 +37,9 @@ public class LoadoutContainer extends Container {
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
         return null;
     }
+	
+	@Override
+	public void onContainerClosed(EntityPlayer entityPlayer) {
+		super.onContainerClosed(entityPlayer);
+	}
 }

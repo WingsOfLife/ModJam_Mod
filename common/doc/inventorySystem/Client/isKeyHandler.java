@@ -29,7 +29,7 @@ public class isKeyHandler extends KeyHandler {
 			EntityPlayer ePlayer = FMLClientHandler.instance().getClient().thePlayer;
 			
 			switch(RegisterKeyBinding.keyMapping.get(kb.keyCode)) {
-			case RegisterKeyBinding.KEY_INDEX:
+			case RegisterKeyBinding.LOADOUT_INV:
 				if (ePlayer.openContainer != null && ePlayer.openContainer instanceof LoadoutContainer) {
 					ePlayer.closeScreen();
 				} else if (FMLClientHandler.instance().getClient().inGameHasFocus) {
