@@ -39,9 +39,11 @@ public class LoadoutHelper {
 					}	
 					
 					for (int j = 9; j < playerInventory.getSizeInventory(); j++) { //search vanilla
-						if (searchFor.equals(loadoutInventory.getStackInSlot(searchSlots[j])) && !whatSwapped[j]) {
-							playerInventory.setInventorySlotContents(i, searchFor);
-							whatSwapped[j] = true;
+						int slotNumber = (j % 8) - rowNumber(j);
+						if (playerInventory.getStackInSlot(j) != null && searchFor.itemID == playerInventory.getStackInSlot(j).itemID && !whatSwapped[slotNumber]) {
+							playerInventory.setInventorySlotContents(searchSlots[slotNumber], searchFor);
+							loadoutInventory.setInventorySlotContents(j, null);
+							whatSwapped[slotNumber] = true;
 						}
 					}
 				}
@@ -59,5 +61,15 @@ public class LoadoutHelper {
 		case 3: return loadoutThr;
 		}
 		return new int[] {};
+	}
+	
+	public static int rowNumber(int number) {
+		if (number >= 9 && number <= 16)
+			return 1;
+		else if (number >= 17 && number <= 24)
+			return 2;
+		else if (number >= 25 && number <= 32)
+			return 3;
+		return 0;
 	}
 }
