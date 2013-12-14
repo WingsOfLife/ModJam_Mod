@@ -22,8 +22,6 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	
 	public ExtendedEntityRender(EntityPlayer player) {
 		this.player = player;
-		
-		loadOuts.add(new ItemStack[] { new ItemStack(Item.pickaxeDiamond), new ItemStack(Item.arrow, 32), null, new ItemStack(Block.cobblestone, 12) });
 	}
 	
 	public static final void register(EntityPlayer player) {

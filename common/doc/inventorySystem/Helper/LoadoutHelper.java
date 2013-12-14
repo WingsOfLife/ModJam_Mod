@@ -1,7 +1,9 @@
 package doc.inventorySystem.Helper;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import doc.inventorySystem.Client.GUI.LoadOutInventory;
 import doc.inventorySystem.Common.ExtendedEntityRender;
@@ -18,10 +20,11 @@ public class LoadoutHelper {
 		InventoryPlayer playerInventory = player.inventory;
 		LoadOutInventory loadoutInventory = props.inventory;
 
-		boolean emptyLoadout = props.loadOuts.get(loadout) == null;
+		props.loadOuts.add(new ItemStack[] { new ItemStack(Item.pickaxeDiamond), new ItemStack(Item.arrow, 32), null, new ItemStack(Block.cobblestone, 12) });
+		boolean emptyLoadout = props.loadOuts.get(loadout - 1) == null;
 
 		if (!emptyLoadout) {
-			final ItemStack[] ghostLoadout = props.loadOuts.get(loadout);
+			final ItemStack[] ghostLoadout = props.loadOuts.get(loadout - 1);
 			boolean[] whatSwapped = { false, false, false, false, false, false, false, false, false };
 			int[] searchSlots = loadoutSlots(loadout);
 
