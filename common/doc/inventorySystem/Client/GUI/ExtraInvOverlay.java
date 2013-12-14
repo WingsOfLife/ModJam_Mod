@@ -11,6 +11,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.event.EventPriority;
 import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -40,6 +41,11 @@ public class ExtraInvOverlay extends Gui {
 		this.mc = mc;
 	}
 
+	@ForgeSubscribe
+	public void onEntityDeath(LivingDeathEvent event) {
+		ExtendedEntityRender props = new ExtendedEntityRender(mc.thePlayer);
+	}
+	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event) {
 		if (event.type != ElementType.HOTBAR)
@@ -51,9 +57,7 @@ public class ExtraInvOverlay extends Gui {
 				event.setCanceled(true);
 
 			ExtendedEntityRender props = new ExtendedEntityRender(mc.thePlayer);
-			if (props == null)
-				return;
-
+			ItemStack[] loadOut = new ItemStack[9];
 
 			int xCenter = (event.resolution.getScaledWidth() + textureXSize) / 2;
 			int yCenter = (event.resolution.getScaledHeight() + textureYSize) / 2;
