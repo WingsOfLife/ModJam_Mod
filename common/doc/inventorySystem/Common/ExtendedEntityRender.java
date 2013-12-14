@@ -16,6 +16,7 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	
 	public final EntityPlayer player;
 	public final LoadOutInventory inventory = new LoadOutInventory();
+	public ArrayList<ItemStack[]> loadOuts = new ArrayList<ItemStack[]>();
 	
 	public ExtendedEntityRender(EntityPlayer player) {
 		this.player = player;

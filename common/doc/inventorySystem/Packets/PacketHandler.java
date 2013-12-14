@@ -7,11 +7,13 @@ import cpw.mods.fml.common.network.Player;
 
 public class PacketHandler implements IPacketHandler {
 
+	public static class PacketIds {
+		public static final int openGUI = 0;
+	}
+	
 	@Override
-	public void onPacketData(INetworkManager manager,
-			Packet250CustomPayload packet, Player player) {
-		// TODO Auto-generated method stub
-		
+	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
+				
 	}
 
 }
