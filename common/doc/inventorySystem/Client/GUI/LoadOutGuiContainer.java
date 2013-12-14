@@ -35,8 +35,9 @@ public class LoadOutGuiContainer extends GuiContainer {
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = this.inventory.isInvNameLocalized() ? this.inventory.getInvName() : "";
-
-		//this.fontRenderer.drawString(s, (this.xSize / 2) - this.fontRenderer.getStringWidth(s) + 22, (ySize / 2) - 15, 4210752);
+		
+		for (int i = 1; i < 4; i++)
+			this.fontRenderer.drawString(i + "", (this.xSize / 2) - this.fontRenderer.getStringWidth(s) - 28, i * 18 - 4, 4210752);
 	}
 
 	/**
