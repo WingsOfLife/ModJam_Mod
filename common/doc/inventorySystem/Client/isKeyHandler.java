@@ -9,6 +9,7 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
 import doc.inventorySystem.Client.GUI.LoadoutContainer;
 import doc.inventorySystem.Common.ExtendedEntityRender;
+import doc.inventorySystem.Helper.LoadoutHelper;
 import doc.inventorySystem.Packets.PacketHandler;
 
 public class isKeyHandler extends KeyHandler {
@@ -39,7 +40,8 @@ public class isKeyHandler extends KeyHandler {
 				}
 				break;
 			case RegisterKeyBinding.LOADOUT_ONE:
-				
+				LoadoutHelper.swapToLoadout(1, ePlayer);
+				break;
 			}
 		}
 		

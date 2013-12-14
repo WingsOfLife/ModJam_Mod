@@ -3,8 +3,10 @@ package doc.inventorySystem.Common;
 import java.util.ArrayList;
 
 import doc.inventorySystem.Client.GUI.LoadOutInventory;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -20,6 +22,8 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	
 	public ExtendedEntityRender(EntityPlayer player) {
 		this.player = player;
+		
+		loadOuts.add(new ItemStack[] { new ItemStack(Item.pickaxeDiamond), new ItemStack(Item.arrow, 32), null, new ItemStack(Block.cobblestone, 12) });
 	}
 	
 	public static final void register(EntityPlayer player) {
