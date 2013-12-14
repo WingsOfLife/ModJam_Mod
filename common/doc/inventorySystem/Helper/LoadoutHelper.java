@@ -10,10 +10,10 @@ import doc.inventorySystem.Common.ExtendedEntityRender;
 
 public class LoadoutHelper {
 
-	public static int[] loadoutOne = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	public static int[] loadoutTwo = { 10, 11, 12, 13, 14, 15, 16, 17, 18 };
-	public static int[] loadoutThr = { 19, 20, 21, 22, 23, 24, 25, 26, 27 };
-	public static int[] overflow   = { 28, 29, 30, 31, 32, 33, 34, 35, 36 };
+	public static int[] loadoutOne = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+	public static int[] loadoutTwo = { 9, 10, 11, 12, 13, 14, 15, 16 };
+	public static int[] loadoutThr = { 17, 18, 19, 20, 21, 22, 23, 24 };
+	public static int[] overflow   = { 25, 26, 27, 28, 29, 21, 31, 32 };
 
 	public static void swapToLoadout(int loadout, EntityPlayer player) {
 		ExtendedEntityRender props = ExtendedEntityRender.get(player);
@@ -31,18 +31,19 @@ public class LoadoutHelper {
 			for (ItemStack searchFor : ghostLoadout) {
 				if (searchFor != null) {
 					for (int i = 0; i < searchSlots.length; i++) { //search loadout row first
-						if (loadoutInventory.getStackInSlot(searchSlots[i]) != null && searchFor.equals(loadoutInventory.getStackInSlot(searchSlots[i])) && !whatSwapped[i]) {
+						if (loadoutInventory.getStackInSlot(searchSlots[i]) != null && searchFor.itemID == loadoutInventory.getStackInSlot(searchSlots[i]).itemID && !whatSwapped[i]) {
 							playerInventory.setInventorySlotContents(i, searchFor);
+							loadoutInventory.setInventorySlotContents(searchSlots[i], null);
 							whatSwapped[i] = true;
 						}
 					}	
 					
-					/*for (int j = 9; j < playerInventory.getSizeInventory(); j++) { //search vanilla
+					for (int j = 9; j < playerInventory.getSizeInventory(); j++) { //search vanilla
 						if (searchFor.equals(loadoutInventory.getStackInSlot(searchSlots[j])) && !whatSwapped[j]) {
 							playerInventory.setInventorySlotContents(i, searchFor);
 							whatSwapped[j] = true;
 						}
-					}*/
+					}
 				}
 			}
 
