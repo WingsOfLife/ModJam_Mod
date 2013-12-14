@@ -28,7 +28,7 @@ public class ISEventHandler {
 			ExtendedEntityRender props = ExtendedEntityRender.get((EntityPlayer) event.entity);
 			for (int i = 0; i < props.inventory.getSizeInventory(); i++)
 				if (props.inventory.getStackInSlot(i) != null)
-					ItemHelper.spawnItem(props.inventory.getStackInSlot(i), event.entity.worldObj, event.entity.serverPosX, event.entity.serverPosY, event.entity.serverPosZ);
+					ItemHelper.spawnItem(props.inventory.getStackInSlot(i), event.entity.worldObj, (int) event.entity.posX, (int) event.entity.posY, (int) event.entity.serverPosZ);
 		}
 	}
 }
