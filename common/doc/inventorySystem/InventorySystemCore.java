@@ -11,6 +11,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import doc.inventorySystem.Client.RegisterKeyBinding;
 import doc.inventorySystem.Client.GUI.ExtraInvOverlay;
 import doc.inventorySystem.Common.CommonProxy;
@@ -35,6 +36,7 @@ public class InventorySystemCore {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(new ISEventHandler());
+		NetworkRegistry.instance().registerGuiHandler(this, proxy);
 	}
 	
 	@EventHandler
