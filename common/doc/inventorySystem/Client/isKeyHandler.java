@@ -8,6 +8,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.KeyBindingRegistry.KeyHandler;
 import cpw.mods.fml.common.TickType;
 import doc.inventorySystem.Client.GUI.LoadoutContainer;
+import doc.inventorySystem.Common.ExtendedEntityRender;
 import doc.inventorySystem.Packets.PacketHandler;
 
 public class isKeyHandler extends KeyHandler {
@@ -27,6 +28,7 @@ public class isKeyHandler extends KeyHandler {
 	public void keyDown(EnumSet<TickType> types, KeyBinding kb,	boolean tickEnd, boolean isRepeat) {
 		if (tickEnd && RegisterKeyBinding.keyMapping.containsKey(kb.keyCode)) {
 			EntityPlayer ePlayer = FMLClientHandler.instance().getClient().thePlayer;
+			ExtendedEntityRender props = ExtendedEntityRender.get(ePlayer);
 			
 			switch(RegisterKeyBinding.keyMapping.get(kb.keyCode)) {
 			case RegisterKeyBinding.LOADOUT_INV:
@@ -35,6 +37,9 @@ public class isKeyHandler extends KeyHandler {
 				} else if (FMLClientHandler.instance().getClient().inGameHasFocus) {
 					PacketHandler.sendOpenGuiPacket(PacketHandler.PacketIds.openGUI);
 				}
+				break;
+			case RegisterKeyBinding.LOADOUT_ONE:
+				
 			}
 		}
 		
