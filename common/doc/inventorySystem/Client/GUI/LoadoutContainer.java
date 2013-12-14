@@ -13,9 +13,12 @@ public class LoadoutContainer extends Container {
 		/*this.addSlotToContainer(new Slot(inventoryCustom, 0, 80, 8));
 		this.addSlotToContainer(new Slot(inventoryCustom, 1, 80, 26));*/
 		
-		for (int i = 0; i < 3; i++) // custom inventory
+		for (int i = 0; i < 3; i++) // custom loadout inventory
 			for (int j = 0; j < 9; j++)
 				this.addSlotToContainer(new Slot(inventoryCustom, j + i * 9 + 9, 8 + j * 18, 8 + i * 18));
+		
+		for (int i = inventoryCustom.getSizeInventory() - 1; i < 9; i++) // loadout overflow
+			this.addSlotToContainer(new Slot(inventoryCustom, i, 8 + i * 18, 80));
 		
 		for (int i = 0; i < 3; i++) // vanilla inventory
 			for (int j = 0; j < 9; j++)
@@ -30,44 +33,11 @@ public class LoadoutContainer extends Container {
 		return true;
 	}
 	
+	/*
+	 * No shift clicking in attempt to prevent abuse.
+	 */
 	@Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slot)
-    {
-        ItemStack stack = null;
-        Slot slotObject = (Slot) inventorySlots.get(slot);
-
-        if (slotObject != null && slotObject.getHasStack())
-        {
-            ItemStack stackInSlot = slotObject.getStack();
-            stack = stackInSlot.copy();
-
-            if (slot < 0)
-                if (!this.mergeItemStack(stackInSlot, 0, 35, true))
-                {
-                    return null;
-                }
-                else if (!this.mergeItemStack(stackInSlot, 0, 9, false))
-                {
-                    return null;
-                }
-
-            if (stackInSlot.stackSize == 0)
-            {
-                slotObject.putStack(null);
-            }
-            else
-            {
-                slotObject.onSlotChanged();
-            }
-
-            if (stackInSlot.stackSize == stack.stackSize)
-            {
-                return null;
-            }
-
-            slotObject.onPickupFromSlot(player, stackInSlot);
-        }
-
-        return stack;
+    public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+        return null;
     }
 }

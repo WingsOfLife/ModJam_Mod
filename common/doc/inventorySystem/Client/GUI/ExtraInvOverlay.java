@@ -40,11 +40,6 @@ public class ExtraInvOverlay extends Gui {
 		super();
 		this.mc = mc;
 	}
-
-	@ForgeSubscribe
-	public void onEntityDeath(LivingDeathEvent event) {
-		ExtendedEntityRender props = new ExtendedEntityRender(mc.thePlayer);
-	}
 	
 	@ForgeSubscribe(priority = EventPriority.NORMAL)
 	public void onRenderExperienceBar(RenderGameOverlayEvent event) {
