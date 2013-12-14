@@ -11,6 +11,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import doc.inventorySystem.Client.RegisterKeyBinding;
 import doc.inventorySystem.Client.GUI.ExtraInvOverlay;
 import doc.inventorySystem.Common.CommonProxy;
 import doc.inventorySystem.Common.ISEventHandler;
@@ -38,8 +39,11 @@ public class InventorySystemCore {
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
 			MinecraftForge.EVENT_BUS.register(new ExtraInvOverlay(Minecraft.getMinecraft()));
+			RegisterKeyBinding.init();
+		}
+			
 	}
 	
 }
