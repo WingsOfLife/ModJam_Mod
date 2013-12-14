@@ -40,16 +40,7 @@ public class PacketHandler implements IPacketHandler {
 	}
 	
 	private void handleOpenGui(Packet250CustomPayload packet, EntityPlayer player, DataInputStream input) {
-		int guiID;
-		
-		try {
-			guiID = input.readInt();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-		
-		player.openGui(InventorySystemCore.instance, guiID, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+		player.openGui(InventorySystemCore.instance, PacketIds.openGUI, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 	}
 
 	public static final void sendOpenGuiPacket(int guiID) {
