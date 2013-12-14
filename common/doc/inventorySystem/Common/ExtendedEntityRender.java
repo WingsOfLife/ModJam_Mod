@@ -2,6 +2,7 @@ package doc.inventorySystem.Common;
 
 import java.util.ArrayList;
 
+import doc.inventorySystem.Client.GUI.LoadOutInventory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,7 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	public static final String EXT_NAME = "customInventoryRender";
 	
 	public final EntityPlayer player;
-	public final ArrayList<ItemStack[]> loadOuts = new ArrayList<ItemStack[]>(); 
+	public final LoadOutInventory inventory = new LoadOutInventory();
 	
 	public ExtendedEntityRender(EntityPlayer player) {
 		this.player = player;
@@ -29,10 +30,14 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	}
 	
 	@Override
-	public void saveNBTData(NBTTagCompound compound) {}
+	public void saveNBTData(NBTTagCompound compound) {
+		inventory.writeToNBT(compound);
+	}
 
 	@Override
-	public void loadNBTData(NBTTagCompound compound) {}
+	public void loadNBTData(NBTTagCompound compound) {
+		inventory.readFromNBT(compound);
+	}
 
 	@Override
 	public void init(Entity entity, World world) {}
