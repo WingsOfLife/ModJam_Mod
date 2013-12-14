@@ -15,7 +15,7 @@ public class LoadOutInventory implements IInventory {
 	/** Define the inventory size here for easy reference */
 	// This is also the place to define which slot is which if you have different types,
 	// for example SLOT_SHIELD = 0, SLOT_AMULET = 1;
-	public static final int INV_SIZE = 37;
+	public static final int INV_SIZE = 36;
 
 	/** Inventory's size must be same as number of slots you add to the Container class */
 	ItemStack[] inventory = new ItemStack[INV_SIZE];
@@ -24,7 +24,7 @@ public class LoadOutInventory implements IInventory {
 
 	@Override
 	public int getSizeInventory() {
-		return inventory.length;
+		return inventory.length - 1;
 	}
 
 	@Override
