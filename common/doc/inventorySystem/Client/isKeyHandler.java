@@ -15,11 +15,11 @@ import doc.inventorySystem.Packets.PacketHandler;
 public class isKeyHandler extends KeyHandler {
 
 	public static final String name = "Extended Inventory Hotkey";
-	
+
 	public isKeyHandler(KeyBinding[] keyBinding, boolean[] repeating) {
 		super(keyBinding, repeating);
 	}
-	
+
 	@Override
 	public String getLabel() {
 		return name;
@@ -30,7 +30,7 @@ public class isKeyHandler extends KeyHandler {
 		if (tickEnd && RegisterKeyBinding.keyMapping.containsKey(kb.keyCode)) {
 			EntityPlayer ePlayer = FMLClientHandler.instance().getClient().thePlayer;
 			ExtendedEntityRender props = ExtendedEntityRender.get(ePlayer);
-			
+
 			switch(RegisterKeyBinding.keyMapping.get(kb.keyCode)) {
 			case RegisterKeyBinding.LOADOUT_INV:
 				if (ePlayer.openContainer != null && ePlayer.openContainer instanceof LoadoutContainer) {
@@ -43,9 +43,17 @@ public class isKeyHandler extends KeyHandler {
 				LoadoutHelper.swapToLoadout(1, ePlayer);
 				PacketHandler.sendInventoryPacket(PacketHandler.PacketIds.updateInventory, 1);
 				break;
+			case RegisterKeyBinding.LOADOUT_TWO:
+				LoadoutHelper.swapToLoadout(2, ePlayer);
+				PacketHandler.sendInventoryPacket(PacketHandler.PacketIds.updateInventory, 2);
+				break;
+			case RegisterKeyBinding.LOADOUT_THR:
+				LoadoutHelper.swapToLoadout(3, ePlayer);
+				PacketHandler.sendInventoryPacket(PacketHandler.PacketIds.updateInventory, 3);
+				break;
 			}
 		}
-		
+
 	}
 
 	@Override
