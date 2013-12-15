@@ -9,9 +9,9 @@ import doc.inventorySystem.Common.ExtendedEntityRender;
 public class LoadoutHelper {
 
 	public static int[] loadoutOne = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-	public static int[] loadoutTwo = { 9, 10, 11, 12, 13, 14, 15, 16 };
-	public static int[] loadoutThr = { 17, 18, 19, 20, 21, 22, 23, 24 };
-	public static int[] overflow   = { 25, 26, 27, 28, 29, 21, 31, 32 };
+	public static int[] loadoutTwo = { 9, 10, 11, 12, 13, 14, 15, 16, 17 };
+	public static int[] loadoutThr = { 18, 19, 20, 21, 22, 23, 24, 25, 26 };
+	public static int[] overflow   = { 27, 28, 29, 30, 31, 32, 33, 34, 35 };
 
 	public static void swapToLoadout(int loadout, EntityPlayer player) {
 		ExtendedEntityRender props = ExtendedEntityRender.get(player);
@@ -30,7 +30,7 @@ public class LoadoutHelper {
 		
 		if (hasLoadout) {
 			final ItemStack[] ghostLoadout = props.loadOuts.get(loadout - 1);
-			boolean[] whatSwapped = { false, false, false, false, false, false, false, false, false };
+			boolean[] whatSwapped = { false, false, false, false, false, false, false, false, false, false };
 			int[] searchSlots = loadoutSlots(loadout);
 
 			for (ItemStack searchFor : ghostLoadout) {
@@ -166,11 +166,11 @@ public class LoadoutHelper {
 	}
 
 	public static int rowNumber(int number) {
-		if (number >= 10 && number <= 18)
+		if (number >= 9 && number <= 17)
 			return 2;
-		else if (number >= 19 && number <= 27)
+		else if (number >= 18 && number <= 26)
 			return 3;
-		else if (number >= 28 && number <= 36)
+		else if (number >= 27 && number <= 35)
 			return 4;
 		return 1;
 	}
