@@ -32,6 +32,8 @@ public class LoadoutHelper {
 				if (searchFor != null) {
 					for (int i = 0; i < searchSlots.length; i++) { //search loadout row first
 						if (loadoutInventory.getStackInSlot(searchSlots[i]) != null && searchFor.itemID == loadoutInventory.getStackInSlot(searchSlots[i]).itemID && !whatSwapped[i]) {
+							if (playerInventory.getStackInSlot(i) != null)
+								placeItemStackAway(playerInventory.getStackInSlot(i), player);
 							playerInventory.setInventorySlotContents(i, searchFor);
 							loadoutInventory.setInventorySlotContents(searchSlots[i], null);
 							whatSwapped[i] = true;
@@ -42,7 +44,9 @@ public class LoadoutHelper {
 						int slotNumber = j >= (rowNumber(j) * 8) ? (j - (rowNumber(j) * 8)) + (((rowNumber(j) * 8) - 1) % 8) - rowNumber(j) + 1: (j % 8) - rowNumber(j); 
 						if (playerInventory.getStackInSlot(j) != null && searchFor.itemID == playerInventory.getStackInSlot(j).itemID && !whatSwapped[slotNumber]) {
 							playerInventory.setInventorySlotContents(searchSlots[slotNumber], searchFor);
-							loadoutInventory.setInventorySlotContents(j, null);
+							ItemStack stack = playerInventory.getStackInSlot(j);
+							stack.splitStack(searchFor.stackSize);
+							playerInventory.setInventorySlotContents(j, stack.stackSize == 0 ? null : stack);
 							whatSwapped[slotNumber] = true;
 						}
 					}
@@ -54,6 +58,27 @@ public class LoadoutHelper {
 
 	}
 
+	public static boolean placeItemStackAway(ItemStack stack, EntityPlayer ePlayer) {
+		ExtendedEntityRender props = ExtendedEntityRender.get(ePlayer);
+		InventoryPlayer playerInventory = ePlayer.inventory;
+		LoadOutInventory loadoutInventory = props.inventory;
+		
+		for (int j = 9; j < playerInventory.getSizeInventory(); j++) { // vanilla
+			if (playerInventory.getStackInSlot(j) == null) {
+				playerInventory.setInventorySlotContents(j, stack);
+				return true;
+			}				
+		}
+		
+		for (int i = loadoutInventory.getSizeInventory(); i >= loadoutInventory.getSizeInventory() - 9; i--) {
+			if (loadoutInventory.getStackInSlot(i) == null) {
+				loadoutInventory.setInventorySlotContents(i, stack);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static int[] loadoutSlots(int loadout) {
 		switch (loadout) {
 		case 1: return loadoutOne;

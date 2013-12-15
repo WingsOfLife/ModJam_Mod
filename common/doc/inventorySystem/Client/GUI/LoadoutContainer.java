@@ -17,8 +17,12 @@ public class LoadoutContainer extends Container {
 			this.addSlotToContainer(new Slot(inventoryCustom, i, 8 + i * 18, 8));
 		
 		for (int i = 0; i < 3; i++) // custom loadout inventory
-			for (int j = 0; j < 9; j++)
-				this.addSlotToContainer(new Slot(inventoryCustom, j + i * 9 + 9, 8 + j * 18, 26 + i * 18));
+			for (int j = 0; j < 9; j++) {
+				if (j + i * 9 + 9 < 27)
+					this.addSlotToContainer(new Slot(inventoryCustom, j + i * 9 + 9, 8 + j * 18, 26 + i * 18));
+				else
+					this.addSlotToContainer(new overflowSlot(inventoryCustom, j + i * 9 + 9, 8 + j * 18, 26 + i * 18));
+			}
 		
 		for (int i = 0; i < 3; i++) // vanilla inventory
 			for (int j = 0; j < 9; j++)
