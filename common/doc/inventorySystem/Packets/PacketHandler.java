@@ -56,4 +56,17 @@ public class PacketHandler implements IPacketHandler {
 		
 		PacketDispatcher.sendPacketToServer(PacketDispatcher.getPacket("inventorySystem", bAOS.toByteArray()));
 	}
+	
+	public static final void sendInventoryPacket(int packetId, int loadoutId) {
+		ByteArrayOutputStream bAOS = new ByteArrayOutputStream();
+		DataOutputStream output = new DataOutputStream(bAOS);
+		try {
+			output.writeInt(packetId);
+			output.writeInt(loadoutId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		PacketDispatcher.sendPacketToServer(PacketDispatcher.getPacket("inventorySystem", bAOS.toByteArray()));
+	}
 }

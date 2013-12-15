@@ -43,6 +43,8 @@ public class LoadoutHelper {
 					for (int j = 9; j < playerInventory.getSizeInventory(); j++) { //search vanilla
 						int slotNumber = j >= (rowNumber(j) * 8) ? (j - (rowNumber(j) * 8)) + (((rowNumber(j) * 8) - 1) % 8) - rowNumber(j) + 1: (j % 8) - rowNumber(j); 
 						if (playerInventory.getStackInSlot(j) != null && searchFor.itemID == playerInventory.getStackInSlot(j).itemID && !whatSwapped[slotNumber]) {
+							if (playerInventory.getStackInSlot(searchSlots[slotNumber]) != null)
+								placeItemStackAway(playerInventory.getStackInSlot(searchSlots[slotNumber]), player);
 							playerInventory.setInventorySlotContents(searchSlots[slotNumber], searchFor);
 							ItemStack stack = playerInventory.getStackInSlot(j);
 							stack.splitStack(searchFor.stackSize);
@@ -63,14 +65,14 @@ public class LoadoutHelper {
 		InventoryPlayer playerInventory = ePlayer.inventory;
 		LoadOutInventory loadoutInventory = props.inventory;
 		
-		for (int j = 9; j < playerInventory.getSizeInventory(); j++) { // vanilla
+		for (int j = 9; j < playerInventory.mainInventory.length; j++) { // vanilla
 			if (playerInventory.getStackInSlot(j) == null) {
 				playerInventory.setInventorySlotContents(j, stack);
 				return true;
 			}				
 		}
 		
-		for (int i = loadoutInventory.getSizeInventory(); i >= loadoutInventory.getSizeInventory() - 9; i--) {
+		for (int i = 27; i < loadoutInventory.getSizeInventory(); i++) {
 			if (loadoutInventory.getStackInSlot(i) == null) {
 				loadoutInventory.setInventorySlotContents(i, stack);
 				return true;
