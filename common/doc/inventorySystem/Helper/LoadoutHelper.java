@@ -25,7 +25,7 @@ public class LoadoutHelper {
 			return;
 		}			
 		
-		props.setHotbarSave(saveHotBar(player)); //save hotbar before swap
+		//props.setHotbarSave(saveHotBar(player)); //save hotbar before swap
 		repopulateLoadouts(player); //try to restore loadouts from current hotbar
 		
 		if (hasLoadout) {
