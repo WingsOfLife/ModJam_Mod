@@ -24,10 +24,10 @@ public class LoadoutHelper {
 			repopulateLoadouts(player);
 			return;
 		}			
-		
+
 		//props.setHotbarSave(saveHotBar(player)); //save hotbar before swap
 		repopulateLoadouts(player); //try to restore loadouts from current hotbar
-		
+
 		if (hasLoadout) {
 			final ItemStack[] ghostLoadout = props.loadOuts.get(loadout - 1);
 			boolean[] whatSwapped = { false, false, false, false, false, false, false, false, false, false };
@@ -101,46 +101,57 @@ public class LoadoutHelper {
 		InventoryPlayer playerInventory = ePlayer.inventory;
 		LoadOutInventory loadoutInventory = props.inventory;
 
-		
+
 		/*
 		 * Loadout One
 		 */
-		ItemStack[] ghostLoadout = props.loadOuts.get(0);
-		for (int j = 0; j < 9; j++) {
-			if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
-				ItemStack split = playerInventory.getStackInSlot(j).copy();
-				split.splitStack(ghostLoadout[j].stackSize);
-				
-				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
-				loadoutInventory.setInventorySlotContents(loadoutOne[j], ghostLoadout[j]);
+		boolean hasLoadout = props.loadOuts.size() >= 1;
+		if (hasLoadout) {
+			ItemStack[] ghostLoadout = props.loadOuts.get(0);
+			for (int j = 0; j < 9; j++) {
+				if (loadoutInventory.getStackInSlot(loadoutOne[j]) == null && ghostLoadout[j] != null)
+					if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+						ItemStack split = playerInventory.getStackInSlot(j).copy();
+						split.splitStack(ghostLoadout[j].stackSize);
+
+						playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
+						loadoutInventory.setInventorySlotContents(loadoutOne[j], ghostLoadout[j]);
+					}
 			}
 		}
-		
 		/*
 		 * Loadout Two
 		 */
-		ghostLoadout = props.loadOuts.get(1);
-		for (int j = 0; j < 9; j++) {
-			if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
-				ItemStack split = playerInventory.getStackInSlot(j).copy();
-				split.splitStack(ghostLoadout[j].stackSize);
-				
-				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
-				loadoutInventory.setInventorySlotContents(loadoutTwo[j], ghostLoadout[j]);
+		hasLoadout = props.loadOuts.size() >= 2;
+		if (hasLoadout) {
+			ItemStack[] ghostLoadout = props.loadOuts.get(1);
+			for (int j = 0; j < 9; j++) {
+				if (loadoutInventory.getStackInSlot(loadoutTwo[j]) == null && ghostLoadout[j] != null)
+					if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+						ItemStack split = playerInventory.getStackInSlot(j).copy();
+						split.splitStack(ghostLoadout[j].stackSize);
+
+						playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
+						loadoutInventory.setInventorySlotContents(loadoutTwo[j], ghostLoadout[j]);
+					}
 			}
 		}
-		
+
 		/*
 		 * Loadout Thr
 		 */
-		ghostLoadout = props.loadOuts.get(2);
-		for (int j = 0; j < 9; j++) {
-			if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
-				ItemStack split = playerInventory.getStackInSlot(j).copy();
-				split.splitStack(ghostLoadout[j].stackSize);
-				
-				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
-				loadoutInventory.setInventorySlotContents(loadoutThr[j], ghostLoadout[j]);
+		hasLoadout = props.loadOuts.size() >= 3;
+		if (hasLoadout) {
+			ItemStack[] ghostLoadout = props.loadOuts.get(2);
+			for (int j = 0; j < 9; j++) {
+				if (loadoutInventory.getStackInSlot(loadoutThr[j]) == null && ghostLoadout[j] != null)
+					if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+						ItemStack split = playerInventory.getStackInSlot(j).copy();
+						split.splitStack(ghostLoadout[j].stackSize);
+
+						playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
+						loadoutInventory.setInventorySlotContents(loadoutThr[j], ghostLoadout[j]);
+					}
 			}
 		}
 	}
