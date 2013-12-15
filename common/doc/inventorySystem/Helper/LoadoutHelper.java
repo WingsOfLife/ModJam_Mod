@@ -18,9 +18,16 @@ public class LoadoutHelper {
 		InventoryPlayer playerInventory = player.inventory;
 		LoadOutInventory loadoutInventory = props.inventory;
 
-		//props.loadOuts.add(new ItemStack[] { new ItemStack(Item.pickaxeDiamond), new ItemStack(Item.arrow, 32), null, new ItemStack(Block.cobblestone, 12) });
 		boolean hasLoadout = props.loadOuts.size() >= loadout;
 
+		if (loadout == 0) {
+			repopulateLoadouts(player);
+			return;
+		}			
+		
+		props.setHotbarSave(saveHotBar(player)); //save hotbar before swap
+		repopulateLoadouts(player); //try to restore loadouts from current hotbar
+		
 		if (hasLoadout) {
 			final ItemStack[] ghostLoadout = props.loadOuts.get(loadout - 1);
 			boolean[] whatSwapped = { false, false, false, false, false, false, false, false, false };
@@ -37,7 +44,7 @@ public class LoadoutHelper {
 							whatSwapped[i] = true;
 						}
 					}	
-					
+
 					for (int j = 9; j < playerInventory.getSizeInventory(); j++) { //search vanilla
 						int slotNumber = j >= (rowNumber(j) * 8) ? (j - (rowNumber(j) * 8)) + (((rowNumber(j) * 8) - 1) % 8) - rowNumber(j) + 1: (j % 8) - rowNumber(j); 
 						if (playerInventory.getStackInSlot(j) != null && searchFor.itemID == playerInventory.getStackInSlot(j).itemID && !whatSwapped[slotNumber]) {
@@ -62,14 +69,14 @@ public class LoadoutHelper {
 		ExtendedEntityRender props = ExtendedEntityRender.get(ePlayer);
 		InventoryPlayer playerInventory = ePlayer.inventory;
 		LoadOutInventory loadoutInventory = props.inventory;
-		
+
 		for (int j = 9; j < playerInventory.mainInventory.length; j++) { // vanilla
 			if (playerInventory.getStackInSlot(j) == null) {
 				playerInventory.setInventorySlotContents(j, stack);
 				return true;
 			}				
 		}
-		
+
 		for (int i = 27; i < loadoutInventory.getSizeInventory(); i++) {
 			if (loadoutInventory.getStackInSlot(i) == null) {
 				loadoutInventory.setInventorySlotContents(i, stack);
@@ -78,24 +85,77 @@ public class LoadoutHelper {
 		}
 		return false;
 	}
-	
-	
+
+
 	public static ItemStack[] saveHotBar(EntityPlayer ePlayer) {
-		
-		return null;
+
+		InventoryPlayer inventory = ePlayer.inventory;
+		ItemStack[] hotbarSave = new ItemStack[9];
+		for (int i = 0; i < 9; i++)
+			hotbarSave[i] = inventory.getStackInSlot(i);
+		return hotbarSave;
 	}
-	
+
+	public static void repopulateLoadouts(EntityPlayer ePlayer) {
+		ExtendedEntityRender props = ExtendedEntityRender.get(ePlayer);
+		InventoryPlayer playerInventory = ePlayer.inventory;
+		LoadOutInventory loadoutInventory = props.inventory;
+
+		
+		/*
+		 * Loadout One
+		 */
+		ItemStack[] ghostLoadout = props.loadOuts.get(0);
+		for (int j = 0; j < 9; j++) {
+			if (playerInventory.getStackInSlot(j) != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+				ItemStack split = playerInventory.getStackInSlot(j).copy();
+				split.splitStack(ghostLoadout[j].stackSize);
+				
+				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
+				loadoutInventory.setInventorySlotContents(loadoutOne[j], ghostLoadout[j]);
+			}
+		}
+		
+		/*
+		 * Loadout Two
+		 */
+		ghostLoadout = props.loadOuts.get(1);
+		for (int j = 0; j < 9; j++) {
+			if (playerInventory.getStackInSlot(j) != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+				ItemStack split = playerInventory.getStackInSlot(j).copy();
+				split.splitStack(ghostLoadout[j].stackSize);
+				
+				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
+				loadoutInventory.setInventorySlotContents(loadoutOne[j], ghostLoadout[j]);
+			}
+		}
+		
+		/*
+		 * Loadout Thr
+		 */
+		ghostLoadout = props.loadOuts.get(2);
+		for (int j = 0; j < 9; j++) {
+			if (playerInventory.getStackInSlot(j) != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+				ItemStack split = playerInventory.getStackInSlot(j).copy();
+				split.splitStack(ghostLoadout[j].stackSize);
+				
+				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
+				loadoutInventory.setInventorySlotContents(loadoutOne[j], ghostLoadout[j]);
+			}
+		}
+	}
+
 	public static boolean containsOneItem(int loadout, ItemStack[] stack) {
 		int[] slots = loadoutSlots(loadout);
-		
+
 		for (int i = 0; i < slots.length; i++) {
 			if (stack[i] != null)
 				return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public static int[] loadoutSlots(int loadout) {
 		switch (loadout) {
 		case 1: return loadoutOne;
@@ -104,7 +164,7 @@ public class LoadoutHelper {
 		}
 		return new int[] {};
 	}
-	
+
 	public static int rowNumber(int number) {
 		if (number >= 10 && number <= 18)
 			return 2;

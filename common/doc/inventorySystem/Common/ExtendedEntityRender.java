@@ -19,6 +19,8 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	public final EntityPlayer player;
 	public final LoadOutInventory inventory = new LoadOutInventory();
 	public ArrayList<ItemStack[]> loadOuts = new ArrayList<ItemStack[]>();
+	
+	public ItemStack[] hotbarSave = new ItemStack[9];
 
 	public ExtendedEntityRender(EntityPlayer player) {
 		this.player = player;
@@ -47,6 +49,10 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 
 	public void setLoadout(ItemStack[] loadout, int pos) {
 		loadOuts.add(pos, loadout);
+	}
+	
+	public void setHotbarSave(ItemStack[] stack) {
+		hotbarSave = stack;
 	}
 
 }
