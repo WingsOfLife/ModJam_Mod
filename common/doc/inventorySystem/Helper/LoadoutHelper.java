@@ -20,7 +20,7 @@ public class LoadoutHelper {
 		InventoryPlayer playerInventory = player.inventory;
 		LoadOutInventory loadoutInventory = props.inventory;
 
-		props.loadOuts.add(new ItemStack[] { new ItemStack(Item.pickaxeDiamond), new ItemStack(Item.arrow, 32), null, new ItemStack(Block.cobblestone, 12) });
+		//props.loadOuts.add(new ItemStack[] { new ItemStack(Item.pickaxeDiamond), new ItemStack(Item.arrow, 32), null, new ItemStack(Block.cobblestone, 12) });
 		boolean emptyLoadout = props.loadOuts.get(loadout - 1) == null;
 
 		if (!emptyLoadout) {
@@ -78,6 +78,17 @@ public class LoadoutHelper {
 				return true;
 			}
 		}
+		return false;
+	}
+	
+	public static boolean containsOneItem(int loadout, ItemStack[] stack) {
+		int[] slots = loadoutSlots(loadout);
+		
+		for (int i = 0; i < slots.length; i++) {
+			if (stack[i] != null)
+				return true;
+		}
+		
 		return false;
 	}
 	

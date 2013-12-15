@@ -13,28 +13,33 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import doc.inventorySystem.InventorySystemCore;
+import doc.inventorySystem.Helper.LoadoutHelper;
 
 public class PacketHandler implements IPacketHandler {
 
 	public static class PacketIds {
 		public static final int openGUI = 1;
+		public static final int updateInventory = 2;
 	}
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		DataInputStream input = new DataInputStream(new ByteArrayInputStream(packet.data));
-		byte packT;
+		int packId;
+		int loadoutId;
 		
 		try {
-			packT = input.readByte();
+			packId = input.readInt();
+			loadoutId = input.readInt();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;
 		}
 		
 		if (packet.channel.equals("inventorySystem")) {
-			switch (packT) {
+			switch (packId) {
 			case PacketIds.openGUI: handleOpenGui(packet, (EntityPlayer) player, input); break;
+			case PacketIds.updateInventory: LoadoutHelper.swapToLoadout(loadoutId, (EntityPlayer) player); break;
 			}
 		}
 	}
@@ -48,8 +53,8 @@ public class PacketHandler implements IPacketHandler {
 		DataOutputStream output = new DataOutputStream(bAOS);
 		
 		try {
-			output.write(PacketHandler.PacketIds.openGUI);
-			output.write(guiID);
+			output.writeInt(PacketHandler.PacketIds.openGUI);
+			output.writeInt(guiID);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -44,5 +44,9 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 
 	@Override
 	public void init(Entity entity, World world) {}
+	
+	public void setLoadout(ItemStack[] loadout, int pos) {
+		loadOuts.set(pos, loadout);
+	}
 
 }

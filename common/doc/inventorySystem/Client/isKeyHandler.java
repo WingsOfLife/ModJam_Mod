@@ -41,6 +41,7 @@ public class isKeyHandler extends KeyHandler {
 				break;
 			case RegisterKeyBinding.LOADOUT_ONE:
 				LoadoutHelper.swapToLoadout(1, ePlayer);
+				PacketHandler.sendInventoryPacket(PacketHandler.PacketIds.updateInventory, 1);
 				break;
 			}
 		}

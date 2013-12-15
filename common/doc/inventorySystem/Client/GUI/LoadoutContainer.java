@@ -1,5 +1,7 @@
 package doc.inventorySystem.Client.GUI;
 
+import doc.inventorySystem.Common.ExtendedEntityRender;
+import doc.inventorySystem.Helper.LoadoutHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -46,7 +48,28 @@ public class LoadoutContainer extends Container {
     }
 	
 	@Override
-	public void onContainerClosed(EntityPlayer entityPlayer) {
-		super.onContainerClosed(entityPlayer);
+	public void onContainerClosed(EntityPlayer ePlayer) {
+		super.onContainerClosed(ePlayer);
+		
+		ExtendedEntityRender props = ExtendedEntityRender.get(ePlayer);
+		LoadOutInventory loadoutInventory = props.inventory;
+		
+		for (int i = 0; i < LoadoutHelper.loadoutOne.length; i++) {
+			ItemStack[] loadout = new ItemStack[9];
+			loadout[i] = loadoutInventory.getStackInSlot(LoadoutHelper.loadoutOne[i]);
+			props.setLoadout(loadout, 0);
+		}
+		
+		for (int i = 0; i < LoadoutHelper.loadoutTwo.length; i++) {
+			ItemStack[] loadout = new ItemStack[9];
+			loadout[i] = loadoutInventory.getStackInSlot(LoadoutHelper.loadoutTwo[i]);
+			props.setLoadout(loadout, 0);
+		}
+		
+		for (int i = 0; i < LoadoutHelper.loadoutThr.length; i++) {
+			ItemStack[] loadout = new ItemStack[9];
+			loadout[i] = loadoutInventory.getStackInSlot(LoadoutHelper.loadoutThr[i]);
+			props.setLoadout(loadout, 0);
+		}
 	}
 }
