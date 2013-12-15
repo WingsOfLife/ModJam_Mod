@@ -13,13 +13,15 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import doc.inventorySystem.InventorySystemCore;
+import doc.inventorySystem.Client.GUI.LoadoutContainer;
 import doc.inventorySystem.Helper.LoadoutHelper;
 
 public class PacketHandler implements IPacketHandler {
 
 	public static class PacketIds {
-		public static final int openGUI = 1;
+		public static final int openGUI         = 1;
 		public static final int updateInventory = 2;
+		public static final int updateLoadout   = 3;
 	}
 
 	@Override
@@ -40,6 +42,7 @@ public class PacketHandler implements IPacketHandler {
 			switch (packId) {
 			case PacketIds.openGUI: handleOpenGui(packet, (EntityPlayer) player, input); break;
 			case PacketIds.updateInventory: LoadoutHelper.swapToLoadout(loadoutId, (EntityPlayer) player); break;
+			case PacketIds.updateLoadout: LoadoutContainer.saveLoadouts((EntityPlayer) player);
 			}
 		}
 	}
@@ -68,6 +71,19 @@ public class PacketHandler implements IPacketHandler {
 		try {
 			output.writeInt(packetId);
 			output.writeInt(loadoutId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		PacketDispatcher.sendPacketToServer(PacketDispatcher.getPacket("inventorySystem", bAOS.toByteArray()));
+	}
+	
+	public static final void updateLoadouts() {
+		ByteArrayOutputStream bAOS = new ByteArrayOutputStream();
+		DataOutputStream output = new DataOutputStream(bAOS);
+		try {
+			output.writeInt(PacketHandler.PacketIds.updateLoadout);
+			output.writeInt(0);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

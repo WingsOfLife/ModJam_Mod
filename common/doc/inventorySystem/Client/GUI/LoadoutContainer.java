@@ -51,6 +51,10 @@ public class LoadoutContainer extends Container {
 	public void onContainerClosed(EntityPlayer ePlayer) {
 		super.onContainerClosed(ePlayer);
 		
+		
+	}
+	
+	public static void saveLoadouts(EntityPlayer ePlayer) {
 		ExtendedEntityRender props = ExtendedEntityRender.get(ePlayer);
 		LoadOutInventory loadoutInventory = props.inventory;
 		
@@ -63,13 +67,13 @@ public class LoadoutContainer extends Container {
 		for (int i = 0; i < LoadoutHelper.loadoutTwo.length; i++) {
 			ItemStack[] loadout = new ItemStack[9];
 			loadout[i] = loadoutInventory.getStackInSlot(LoadoutHelper.loadoutTwo[i]);
-			props.setLoadout(loadout, 0);
+			props.setLoadout(loadout, 1);
 		}
 		
 		for (int i = 0; i < LoadoutHelper.loadoutThr.length; i++) {
 			ItemStack[] loadout = new ItemStack[9];
 			loadout[i] = loadoutInventory.getStackInSlot(LoadoutHelper.loadoutThr[i]);
-			props.setLoadout(loadout, 0);
+			props.setLoadout(loadout, 2);	
 		}
 	}
 }

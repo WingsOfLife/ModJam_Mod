@@ -21,7 +21,7 @@ public class LoadoutHelper {
 		LoadOutInventory loadoutInventory = props.inventory;
 
 		//props.loadOuts.add(new ItemStack[] { new ItemStack(Item.pickaxeDiamond), new ItemStack(Item.arrow, 32), null, new ItemStack(Block.cobblestone, 12) });
-		boolean emptyLoadout = props.loadOuts.get(loadout - 1) == null;
+		boolean emptyLoadout = props.loadOuts.isEmpty();
 
 		if (!emptyLoadout) {
 			final ItemStack[] ghostLoadout = props.loadOuts.get(loadout - 1);
@@ -35,7 +35,9 @@ public class LoadoutHelper {
 							if (playerInventory.getStackInSlot(i) != null)
 								placeItemStackAway(playerInventory.getStackInSlot(i), player);
 							playerInventory.setInventorySlotContents(i, searchFor);
-							loadoutInventory.setInventorySlotContents(searchSlots[i], null);
+							ItemStack stack = loadoutInventory.getStackInSlot(searchSlots[i]);
+							stack.splitStack(searchFor.stackSize);
+							loadoutInventory.setInventorySlotContents(searchSlots[i], stack.stackSize == 0 ? null : stack);
 							whatSwapped[i] = true;
 						}
 					}	
