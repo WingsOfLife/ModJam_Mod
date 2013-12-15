@@ -107,7 +107,7 @@ public class LoadoutHelper {
 		 */
 		ItemStack[] ghostLoadout = props.loadOuts.get(0);
 		for (int j = 0; j < 9; j++) {
-			if (playerInventory.getStackInSlot(j) != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+			if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
 				ItemStack split = playerInventory.getStackInSlot(j).copy();
 				split.splitStack(ghostLoadout[j].stackSize);
 				
@@ -121,12 +121,12 @@ public class LoadoutHelper {
 		 */
 		ghostLoadout = props.loadOuts.get(1);
 		for (int j = 0; j < 9; j++) {
-			if (playerInventory.getStackInSlot(j) != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+			if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
 				ItemStack split = playerInventory.getStackInSlot(j).copy();
 				split.splitStack(ghostLoadout[j].stackSize);
 				
 				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
-				loadoutInventory.setInventorySlotContents(loadoutOne[j], ghostLoadout[j]);
+				loadoutInventory.setInventorySlotContents(loadoutTwo[j], ghostLoadout[j]);
 			}
 		}
 		
@@ -135,12 +135,12 @@ public class LoadoutHelper {
 		 */
 		ghostLoadout = props.loadOuts.get(2);
 		for (int j = 0; j < 9; j++) {
-			if (playerInventory.getStackInSlot(j) != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
+			if (playerInventory.getStackInSlot(j) != null && ghostLoadout[j] != null && playerInventory.getStackInSlot(j).itemID == ghostLoadout[j].itemID) {
 				ItemStack split = playerInventory.getStackInSlot(j).copy();
 				split.splitStack(ghostLoadout[j].stackSize);
 				
 				playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
-				loadoutInventory.setInventorySlotContents(loadoutOne[j], ghostLoadout[j]);
+				loadoutInventory.setInventorySlotContents(loadoutThr[j], ghostLoadout[j]);
 			}
 		}
 	}
