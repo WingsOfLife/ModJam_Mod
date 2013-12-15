@@ -1,9 +1,7 @@
 package doc.inventorySystem.Helper;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import doc.inventorySystem.Client.GUI.LoadOutInventory;
 import doc.inventorySystem.Common.ExtendedEntityRender;
@@ -79,6 +77,12 @@ public class LoadoutHelper {
 			}
 		}
 		return false;
+	}
+	
+	
+	public static ItemStack[] saveHotBar(EntityPlayer ePlayer) {
+		
+		return null;
 	}
 	
 	public static boolean containsOneItem(int loadout, ItemStack[] stack) {
