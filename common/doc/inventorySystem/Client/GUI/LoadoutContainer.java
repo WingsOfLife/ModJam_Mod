@@ -51,7 +51,7 @@ public class LoadoutContainer extends Container {
 	public void onContainerClosed(EntityPlayer ePlayer) {
 		super.onContainerClosed(ePlayer);
 		
-		saveLoadouts(ePlayer);
+		//saveLoadouts(ePlayer);
 	}
 	
 	public static void saveLoadouts(EntityPlayer ePlayer) {

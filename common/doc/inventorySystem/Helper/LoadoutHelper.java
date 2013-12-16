@@ -44,16 +44,17 @@ public class LoadoutHelper {
 							whatSwapped[i] = true;
 						}
 					}	
-
+					
+					
 					for (int j = 9; j < playerInventory.getSizeInventory(); j++) { //search vanilla
-						int slotNumber = j >= (rowNumber(j) * 8) ? (j - (rowNumber(j) * 8)) + (((rowNumber(j) * 8) - 1) % 8) - rowNumber(j) + 1: (j % 8) - rowNumber(j); 
+						int slotNumber = j >= (rowNumber(j) * 8) ? (j - (rowNumber(j) * 8)) + (((rowNumber(j) * 8) - 1) % 8) - rowNumber(j) + 1: (j % 8) - rowNumber(j) + 1; 
 						if (playerInventory.getStackInSlot(j) != null && searchFor.itemID == playerInventory.getStackInSlot(j).itemID && !whatSwapped[slotNumber]) {
 							if (playerInventory.getStackInSlot(searchSlots[slotNumber]) != null)
 								placeItemStackAway(playerInventory.getStackInSlot(searchSlots[slotNumber]), player);
 							playerInventory.setInventorySlotContents(searchSlots[slotNumber], searchFor);
-							ItemStack stack = playerInventory.getStackInSlot(j);
-							stack.splitStack(searchFor.stackSize);
-							playerInventory.setInventorySlotContents(j, stack.stackSize == 0 ? null : stack);
+							/*ItemStack stack = playerInventory.getStackInSlot(j);
+							stack.splitStack(searchFor.stackSize);*/
+							playerInventory.setInventorySlotContents(j, playerInventory.getStackInSlot(j));
 							whatSwapped[slotNumber] = true;
 						}
 					}

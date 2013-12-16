@@ -37,7 +37,7 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound) {
 		inventory.writeToNBT(compound);
 
-		NBTTagList neighborsList = new NBTTagList();
+		/*NBTTagList neighborsList = new NBTTagList();
 		for (int i = 0; i < loadOuts.size(); i++) {
 			NBTTagCompound nbt = new NBTTagCompound();
 			for (int j = 0; j < 9; j++) {
@@ -46,14 +46,14 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
 			}
 			
 			compound.setTag("Loadout", neighborsList);
-		}
+		}*/
 	}
 
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		inventory.readFromNBT(compound);
 		
-		NBTTagList neighborTag = compound.getTagList("Loadout");
+		/*NBTTagList neighborTag = compound.getTagList("Loadout");
 		loadOuts.clear();
 
         for (int iter = 0; iter < neighborTag.tagCount(); iter++) {
@@ -62,7 +62,7 @@ public class ExtendedEntityRender implements IExtendedEntityProperties {
             for (int i = 0; i < 9; i++)
             	totalStack[i] = ItemStack.loadItemStackFromNBT(nbt);
             loadOuts.add(totalStack);
-        }
+        }*/
 	}
 
 	@Override

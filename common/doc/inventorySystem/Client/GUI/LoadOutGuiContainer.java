@@ -1,10 +1,10 @@
 package doc.inventorySystem.Client.GUI;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,6 +12,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import doc.inventorySystem.Packets.PacketHandler;
 
 public class LoadOutGuiContainer extends GuiContainer {
 
@@ -21,10 +23,21 @@ public class LoadOutGuiContainer extends GuiContainer {
 	public static final ResourceLocation Loadout_Gui = new ResourceLocation("inventorysystems", "textures/gui/loadOut.png");
 
 	private final LoadOutInventory inventory;
+	private final EntityPlayer ePlayer;
+
+	GuiButton saveButton;
+
+	public void initGui() {
+		super.initGui();
+
+		saveButton = new GuiButton(0, width/2 + 82, height/2 - 76, 9, 19, "");
+		buttonList.add(saveButton);
+	}
 
 	public LoadOutGuiContainer(EntityPlayer player, InventoryPlayer inventoryPlayer, LoadOutInventory inventoryCustom) {
 		super(new LoadoutContainer(player, inventoryPlayer, inventoryCustom));
-		this.inventory = inventoryCustom;
+		inventory = inventoryCustom;
+		ePlayer = player;
 	}
 
 	public void drawScreen(int par1, int par2, float par3) {
@@ -35,9 +48,15 @@ public class LoadOutGuiContainer extends GuiContainer {
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = this.inventory.isInvNameLocalized() ? this.inventory.getInvName() : "";
-		
+
 		for (int i = 1; i < 4; i++)
 			this.fontRenderer.drawString(i + "", (this.xSize / 2) - this.fontRenderer.getStringWidth(s) - 28, i * 18 - 4, 4210752);
+	}
+
+	public void actionPerformed(GuiButton button) {
+		switch (button.id) {
+		case 0: LoadoutContainer.saveLoadouts(ePlayer); PacketHandler.updateLoadouts();
+		}
 	}
 
 	/**
