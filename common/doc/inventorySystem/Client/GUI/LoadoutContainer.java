@@ -16,22 +16,22 @@ public class LoadoutContainer extends Container {
 		this.addSlotToContainer(new Slot(inventoryCustom, 1, 80, 26));*/
 		
 		for (int i = 0; i < 9; i++) // custom loadout 1 - 9s
-			this.addSlotToContainer(new Slot(inventoryCustom, i, 8 + i * 18, 8));
+			this.addSlotToContainer(new Slot(inventoryCustom, i, 61 + i * 18, 8));
 		
 		for (int i = 0; i < 3; i++) // custom loadout inventory
 			for (int j = 0; j < 9; j++) {
 				if (j + i * 9 + 9 < 27)
-					this.addSlotToContainer(new Slot(inventoryCustom, j + i * 9 + 9, 8 + j * 18, 26 + i * 18));
+					this.addSlotToContainer(new Slot(inventoryCustom, j + i * 9 + 9, 61 + j * 18, 26 + i * 18));
 				else
-					this.addSlotToContainer(new overflowSlot(inventoryCustom, j + i * 9 + 9, 8 + j * 18, 26 + i * 18));
+					this.addSlotToContainer(new overflowSlot(inventoryCustom, j + i * 9 + 9, 61 + j * 18, 26 + i * 18));
 			}
 		
 		for (int i = 0; i < 3; i++) // vanilla inventory
 			for (int j = 0; j < 9; j++)
-				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 61 + j * 18, 84 + i * 18));
 
 		for (int i = 0; i < 9; i++) // vanilla actionSlots
-			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+			this.addSlotToContainer(new Slot(inventoryPlayer, i, 61 + i * 18, 142));
 	}
 
 	@Override

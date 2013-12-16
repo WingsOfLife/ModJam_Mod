@@ -31,7 +31,7 @@ public class LoadOutGuiContainer extends GuiContainer {
 	public void initGui() {
 		super.initGui();
 
-		saveButton = new GuiButton(0, width/2 + 82, height/2 - 76, 9, 19, "");
+		saveButton = new GuiButton(0, width/2 + 106, height/2 - 79, 9, 19, "");
 		buttonList.add(saveButton);
 	}
 
@@ -39,6 +39,7 @@ public class LoadOutGuiContainer extends GuiContainer {
 		super(new LoadoutContainer(player, inventoryPlayer, inventoryCustom));
 		inventory = inventoryCustom;
 		ePlayer = player;
+		xSize = 235;
 	}
 
 	public void drawScreen(int par1, int par2, float par3) {
@@ -49,16 +50,9 @@ public class LoadOutGuiContainer extends GuiContainer {
 
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = this.inventory.isInvNameLocalized() ? this.inventory.getInvName() : "";
-
-		ExtendedEntityRender props = new ExtendedEntityRender(ePlayer);
-		for (int j = 0; j < props.loadOuts.size(); j++) {
-			for (int i = 0; i < props.loadOuts.get(j).length; i++) {
-				itemRenderer.renderItemAndEffectIntoGUI(null, mc.renderEngine, props.loadOuts.get(j)[i], 8 + i * 18, 26 + j * 18);
-			}
-		}
 		
 		for (int i = 1; i < 4; i++)
-			this.fontRenderer.drawString(i + "", (this.xSize / 2) - this.fontRenderer.getStringWidth(s) - 28, i * 18 - 4, 4210752);
+			this.fontRenderer.drawString(i + "", (this.xSize / 2) - this.fontRenderer.getStringWidth(s) - 5, i * 18 - 5, 4210752);
 	}
 
 	public void actionPerformed(GuiButton button) {
@@ -67,23 +61,16 @@ public class LoadOutGuiContainer extends GuiContainer {
 		}
 	}
 
-	/**
-	 * Draw the background layer for the GuiContainer (everything behind the items)
-	 */
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-	{
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(Loadout_Gui);
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(k, l, 0, 0, this.xSize + 6, this.ySize);
+		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
 		int i1;
-		//drawPlayerModel(k + 51, l + 75, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo, this.mc.thePlayer);
+		drawPlayerModel(k + 30, l + 150, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo, this.mc.thePlayer);
 	}
 
-	/**
-	 * Copied straight out of vanilla - renders the player model on screen
-	 */
 	public static void drawPlayerModel(int par0, int par1, int par2, float par3, float par4, EntityLivingBase par5EntityLivingBase) {
 		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 		GL11.glPushMatrix();
