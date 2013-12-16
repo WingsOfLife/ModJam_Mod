@@ -18,7 +18,7 @@ public class RegisterKeyBinding {
 	public static final int LOADOUT_CLR = 4;
 	
 	public static final String[] description = { "Loadout Inventory", "Loadout 1", "Loadout 2", "Loadout 3", "Clear Current Loadout" };
-	public static final int[] keyValues = { Keyboard.KEY_Z, Keyboard.KEY_NUMPAD1, Keyboard.KEY_NUMPAD2, Keyboard.KEY_NUMPAD3, Keyboard.KEY_NUMPAD0 };
+	public static final int[] keyValues = { Keyboard.KEY_DECIMAL, Keyboard.KEY_NUMPAD1, Keyboard.KEY_NUMPAD2, Keyboard.KEY_NUMPAD3, Keyboard.KEY_NUMPAD0 };
 	
 	public static final Map<Integer, Integer> keyMapping = new HashMap<Integer, Integer>();
 	

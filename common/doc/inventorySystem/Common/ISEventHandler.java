@@ -45,6 +45,7 @@ public class ISEventHandler {
 	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
 		if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer) {
 			LoadoutContainer.saveLoadouts((EntityPlayer) event.entity); 
+			((EntityPlayer) event.entity).addChatMessage("Press the decimal key to activate your Loadout Inventory!");
 		}
 	}
 }
