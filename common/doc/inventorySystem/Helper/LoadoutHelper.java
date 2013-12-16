@@ -45,16 +45,15 @@ public class LoadoutHelper {
 						}
 					}	
 					
-					
-					for (int j = 9; j < playerInventory.getSizeInventory(); j++) { //search vanilla
-						int slotNumber = j >= (rowNumber(j) * 8) ? (j - (rowNumber(j) * 8)) + (((rowNumber(j) * 8) - 1) % 8) - rowNumber(j) + 1: (j % 8) - rowNumber(j) + 1; 
+					for (int j = 9; j < playerInventory.mainInventory.length; j++) { //search vanilla
+						int slotNumber = j >= (rowNumber(j) * 8) ? (j - (rowNumber(j) * 8)) + (((rowNumber(j) * 8) - 1) % 8) - rowNumber(j) + 1 : (j % 8) - rowNumber(j) + 1; 
 						if (playerInventory.getStackInSlot(j) != null && searchFor.itemID == playerInventory.getStackInSlot(j).itemID && !whatSwapped[slotNumber]) {
-							if (playerInventory.getStackInSlot(searchSlots[slotNumber]) != null)
-								placeItemStackAway(playerInventory.getStackInSlot(searchSlots[slotNumber]), player);
-							playerInventory.setInventorySlotContents(searchSlots[slotNumber], searchFor);
-							/*ItemStack stack = playerInventory.getStackInSlot(j);
-							stack.splitStack(searchFor.stackSize);*/
-							playerInventory.setInventorySlotContents(j, playerInventory.getStackInSlot(j));
+							if (playerInventory.getStackInSlot(slotNumber) != null)
+								placeItemStackAway(playerInventory.getStackInSlot(slotNumber), player);
+							ItemStack split = playerInventory.getStackInSlot(j);
+							split.splitStack(searchFor.stackSize);
+							playerInventory.setInventorySlotContents(slotNumber, searchFor);
+							playerInventory.setInventorySlotContents(j, split.stackSize == 0 ? null : split);
 							whatSwapped[slotNumber] = true;
 						}
 					}
@@ -178,11 +177,11 @@ public class LoadoutHelper {
 	}
 
 	public static int rowNumber(int number) {
-		if (number >= 9 && number <= 17)
+		if (number >= 10 && number <= 18)
 			return 2;
-		else if (number >= 18 && number <= 26)
+		else if (number >= 19 && number <= 27)
 			return 3;
-		else if (number >= 27 && number <= 35)
+		else if (number >= 28 && number <= 36)
 			return 4;
 		return 1;
 	}
