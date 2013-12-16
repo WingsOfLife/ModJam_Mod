@@ -19,6 +19,7 @@ import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import doc.inventorySystem.Client.RegisterKeyBinding;
 import doc.inventorySystem.Common.ExtendedEntityRender;
 
 @SideOnly(Side.CLIENT)
@@ -46,7 +47,7 @@ public class ExtraInvOverlay extends Gui {
 		if (event.type != ElementType.HOTBAR)
 			return;
 
-		if (Keyboard.isKeyDown(Keyboard.KEY_Z) && Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+		if (Keyboard.isKeyDown(RegisterKeyBinding.keyValues[0]) && Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
 			
 			if (event.isCancelable() && event.type == ElementType.HOTBAR)
 				event.setCanceled(true);
@@ -76,7 +77,12 @@ public class ExtraInvOverlay extends Gui {
 			GL11.glEnable(GL11.GL_LIGHTING);
 	        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			mc.renderEngine.bindTexture(ITEM_TEXTURE);
-			for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
+			/*for (int j = 0; j < props.loadOuts.size(); j++) {
+				for (int i = 0; i < props.loadOuts.get(j).length; i++) {
+					itemRenderer.renderItemAndEffectIntoGUI(null, mc.renderEngine, props.loadOuts.get(j)[i], 8 + i * 18, 26 + j * 18);
+				}
+			}*/
+			/*for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
 				if (mc.thePlayer.inventory.mainInventory[i] != null) {
 					Icon icon = mc.thePlayer.inventory.mainInventory[i].getIconIndex();
 					ItemStack toRender = new ItemStack(mc.thePlayer.inventory.mainInventory[i].getItem(), 1, mc.thePlayer.inventory.mainInventory[i].getItemDamage());
@@ -84,7 +90,7 @@ public class ExtraInvOverlay extends Gui {
 					//itemRenderer.renderItemOverlayIntoGUI(fontRenderer, mc.func_110434_K(), toRender, xCenter - textureXSize + (16 * i) + 6, yCenter );
 					//itemRenderer.renderIcon(xCenter - textureXSize + (16 * i) + 6, yCenter + 89, icon, 16, 16);
 				}
-			}
+			}*/
 			GL11.glDisable(GL11.GL_LIGHTING);
 		}
 	}

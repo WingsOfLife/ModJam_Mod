@@ -2,6 +2,8 @@ package doc.inventorySystem.Client;
 
 import java.util.EnumSet;
 
+import org.lwjgl.input.Keyboard;
+
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.client.FMLClientHandler;
@@ -33,6 +35,8 @@ public class isKeyHandler extends KeyHandler {
 
 			switch(RegisterKeyBinding.keyMapping.get(kb.keyCode)) {
 			case RegisterKeyBinding.LOADOUT_INV:
+				if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL))
+					return;
 				if (ePlayer.openContainer != null && ePlayer.openContainer instanceof LoadoutContainer) {
 					ePlayer.closeScreen();
 				} else if (FMLClientHandler.instance().getClient().inGameHasFocus) {

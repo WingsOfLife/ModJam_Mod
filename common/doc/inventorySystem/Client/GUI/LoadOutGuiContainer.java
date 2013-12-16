@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import doc.inventorySystem.Common.ExtendedEntityRender;
 import doc.inventorySystem.Packets.PacketHandler;
 
 public class LoadOutGuiContainer extends GuiContainer {
@@ -49,6 +50,13 @@ public class LoadOutGuiContainer extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = this.inventory.isInvNameLocalized() ? this.inventory.getInvName() : "";
 
+		ExtendedEntityRender props = new ExtendedEntityRender(ePlayer);
+		for (int j = 0; j < props.loadOuts.size(); j++) {
+			for (int i = 0; i < props.loadOuts.get(j).length; i++) {
+				itemRenderer.renderItemAndEffectIntoGUI(null, mc.renderEngine, props.loadOuts.get(j)[i], 8 + i * 18, 26 + j * 18);
+			}
+		}
+		
 		for (int i = 1; i < 4; i++)
 			this.fontRenderer.drawString(i + "", (this.xSize / 2) - this.fontRenderer.getStringWidth(s) - 28, i * 18 - 4, 4210752);
 	}
